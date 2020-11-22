@@ -38,6 +38,10 @@ hr{
   color: white;
 }
 
+.form-width{
+  min-width: 600px;
+}
+
 .message-font{
   font-size: 10px;
 }

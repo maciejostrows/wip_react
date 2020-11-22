@@ -3,14 +3,7 @@ import React from 'react';
 import Tester from './additional_fields/tester'
 import Developer from './additional_fields/developer'
 import ProjectManager from './additional_fields/project_manager'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-    useHistory
-} from "react-router-dom";
+import createLink from "./createLink";
 
 class Edit extends React.Component{
   constructor(props) {
@@ -41,7 +34,7 @@ class Edit extends React.Component{
   }
 
   componentDidMount() {
-      fetch(`https://127.0.0.1:8000/get_user/${this.props.match.params.userId}`, {
+      fetch(createLink(`get_user/${this.props.match.params.userId}`), {
         method: 'GET',
         mode: 'cors',
       }).then(response => response.json()).then(data => {
@@ -99,7 +92,7 @@ class Edit extends React.Component{
     this.state.fieldsToSend.forEach(field => {
       formData.append(field, this.state[field])
     })
-    fetch(`https://127.0.0.1:8000/edit_user/${this.state.id}`, {
+    fetch(createLink(`edit_user/${this.state.id}`), {
       method: 'POST',
       mode: 'cors',
       body: formData
@@ -164,7 +157,7 @@ class Edit extends React.Component{
     }
     return (
         <div className="App">
-          <form>
+          <form className={"form-width"}>
             <label htmlFor="name">Imię</label>
             <input type="text"
                    id={"name"}

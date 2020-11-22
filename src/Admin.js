@@ -1,14 +1,9 @@
 import './App.css';
 import React from 'react';
-import Tester from './additional_fields/tester'
-import Developer from './additional_fields/developer'
-import ProjectManager from './additional_fields/project_manager'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
+import createLink from "./createLink";
 
 class Admin extends React.Component{
   constructor(props) {
@@ -24,7 +19,7 @@ class Admin extends React.Component{
   }
 
   getData = () => {
-    fetch('https://127.0.0.1:8000/get_data', {
+    fetch(createLink('get_data'), {
       method: 'GET',
       mode: 'cors',
     }).then(response => response.json()).then(data => {
@@ -36,7 +31,7 @@ class Admin extends React.Component{
 
   deleteUser = (id) => {
     if(window.confirm("Na pewno chcesz usunąć tego użytkownika?")) {
-      fetch(`https://127.0.0.1:8000/delete_user/${id}`, {
+      fetch(createLink(`delete_user/${id}`), {
         method: 'POST',
         mode: 'cors',
       }).then(() => {

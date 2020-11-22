@@ -3,12 +3,7 @@ import React from 'react';
 import Tester from './additional_fields/tester'
 import Developer from './additional_fields/developer'
 import ProjectManager from './additional_fields/project_manager'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import createLink from "./createLink";
 
 class Register extends React.Component{
   constructor(props) {
@@ -74,7 +69,7 @@ class Register extends React.Component{
     this.state.fieldsToSend.forEach(field => {
       formData.append(field, this.state[field])
     })
-    fetch('https://127.0.0.1:8000/save_data', {
+    fetch(createLink('save_data'), {
       method: 'POST',
       mode: 'cors',
       body: formData
@@ -166,7 +161,7 @@ class Register extends React.Component{
     }
     return (
         <div className="App">
-          <form>
+          <form className={"form-width"}>
             <label htmlFor="name">Imię</label>
             <input type="text"
                    id={"name"}
